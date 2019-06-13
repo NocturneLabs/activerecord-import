@@ -553,7 +553,7 @@ class ActiveRecord::Base
       options[:locking_column] = locking_column if attribute_names.include?(locking_column)
 
       is_validating = options[:validate_with_context].present? ? true : options[:validate]
-      validator = ActiveRecord::Import::Validator.new(self, options)
+      validator = is_validating && ActiveRecord::Import::Validator.new(self, options)
 
       # assume array of model objects
       if args.last.is_a?( Array ) && args.last.first.is_a?(ActiveRecord::Base)
